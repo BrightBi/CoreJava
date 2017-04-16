@@ -31,11 +31,6 @@ public class DataType {
 		String s3 = new String("abc");
 		System.out.println((s1 == s2) + " | " + (s1 == s3) + " | " + (s1.equals(s2)) + " | " + (s1.equals(s3)));
 
-		String str = "a■◎b";
-		System.out.println(str.charAt(0) + " | " + str.charAt(1) + " | " + str.charAt(2));
-		System.out.println(str.codePointAt(0) + " | " + str.codePointAt(1) + " | " + str.codePointAt(2));
-		System.out.println(Character.isSupplementaryCodePoint(str.codePointAt(0)));
-		System.out.println(Character.isSupplementaryCodePoint(str.codePointAt(1)));
 	}
 	
 	// 使用 strictfp 修饰一个方法，方法内部将严格按照浮点计算
