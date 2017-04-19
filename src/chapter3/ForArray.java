@@ -25,5 +25,4 @@ public class ForArray {
         System.out.println(Arrays.deepToString(num5));
 
     }
-
 }
