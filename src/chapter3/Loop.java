@@ -9,7 +9,15 @@ public class Loop {
         // breakLoop();
         // break 也可以中断 语句块
         breakIf(11);
+        switchCase(2);
+    }
 
+    public static void switchCase(int c) {
+    	// case 标签必须是整数或枚举常量
+        switch (c) {
+        case 1 : System.out.println(1);
+        case 2 : System.out.println(2);
+        }
     }
 
     public static void breakIf(int middle) {

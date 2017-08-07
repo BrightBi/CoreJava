@@ -19,6 +19,9 @@ public class ForArray {
         Arrays.sort(num2);
         System.out.println(Arrays.toString(num2));
         System.out.println(Arrays.binarySearch(num2, 7));
+        Arrays.fill(num2, 9);
+        System.out.println(Arrays.toString(num2));
+        System.out.println(Arrays.binarySearch(num2, 7));
         // Math.random() 返回一个 [0, 1) 之间的一个浮点数
         System.out.println((int)(Math.random() * 100));
         int [][] num5 = new int [2][2];
