@@ -13,7 +13,7 @@ public class Loop {
     }
 
     public static void switchCase(int c) {
-    	// case 标签必须是整数或枚举常量
+    	// case 标签必须是整数或枚举常量（貌似现在String也可以）
         switch (c) {
         case 1 : System.out.println(1);
         case 2 : System.out.println(2);
