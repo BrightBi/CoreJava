@@ -1,4 +1,4 @@
-package chapter5;
+package corejava.chapter5;
 
 public class ExtendsClass {
 	

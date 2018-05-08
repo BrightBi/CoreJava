@@ -1,4 +1,4 @@
-package chapter3;
+package corejava.chapter3;
 
 public class _TestClassName {
 	

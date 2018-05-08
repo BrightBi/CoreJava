@@ -1,4 +1,4 @@
-package chapter4;
+package corejava.chapter4;
 
 /*
  * 从 main 开始，用到哪个类就将哪个类加载到内存，有继承关系的先加载父类。

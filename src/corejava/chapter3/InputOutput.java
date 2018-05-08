@@ -1,4 +1,4 @@
-package chapter3;
+package corejava.chapter3;
 
 import java.io.Console;
 import java.io.File;
