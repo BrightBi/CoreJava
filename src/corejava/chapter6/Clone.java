@@ -1,4 +1,4 @@
-package corejava.chapter5;
+package corejava.chapter6;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package corejava.chapter5;
+package corejava.chapter6;
 
 /*
  *  接口中的所有域自动属于 public static final 关键字可以省略
