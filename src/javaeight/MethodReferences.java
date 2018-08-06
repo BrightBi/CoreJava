@@ -8,8 +8,19 @@ import java.util.List;
 import java.util.function.Supplier;
 
 class Person {
-	public enum Sex {
-		MALE, FEMALE
+	
+	public Person() {
+		this.name = "Name";
+		this.birthday = LocalDate.now();
+		this.gender = Sex.MALE;
+		this.emailAddress = "EmailAddress";
+	}
+
+	public Person(String name, LocalDate birthday, Sex gender, String emailAddress) {
+		this.name = name;
+		this.birthday = birthday;
+		this.gender = gender;
+		this.emailAddress = emailAddress;
 	}
 
 	String name;
@@ -77,7 +88,7 @@ class Example {
 		return number.step + this.step;
 	}
 	
-	public void referencesThisMethod(List<Person> persons) {
+	public void referencesThisMethod() {
 		List<Example> examples = new ArrayList<>(); 
 		examples.add(new Example(1));
 		examples.add(new Example(2));
@@ -96,13 +107,17 @@ class Example {
 public class MethodReferences {
 
 	public static void main(String[] args) {
-		Person[] persons = new Person[10];
+		Person[] persons = new Person[3];
+		persons[0] = new Person();
+		persons[1] = new Person("Name1", LocalDate.now(), Sex.FEMALE, "EmailAddress1");
+		persons[2] = new Person("Name2", LocalDate.now(), Sex.FEMALE, "EmailAddress2");
 		String[] stringsArray = { "Hello", "World" };
 		referencesClassStaticMethod(persons);
 		referencesObjectMethod(persons);
 		referencesClassObjectMethod(stringsArray);
 		referencesConstructMethod(new ArrayList<>());
 		new ConcurrentGreeter().superMethodReferences();
+		new Example(2).referencesThisMethod();
 	}
 
 	public static void referencesConstructMethod(List<Person> persons) {
@@ -148,4 +163,8 @@ public class MethodReferences {
 		// 使用方法引用,引用的是类的静态方法
 		Arrays.sort(persons, Person::compareByAge);
 	}
+}
+
+enum Sex {
+	MALE, FEMALE
 }
