@@ -11,7 +11,7 @@ public class Generic {
 	public static void main(String[] args) {
 		Pair<String> p = new Pair<>();
 		p.setFirst("first");
-		// 不能用基础类型实例化类型参数
+		// 不能用基础类型实例化类型参数，原因在于类型察除以后 Object 没法代替 int 等基本数据类型
 		// Pair<int> p = new Pair<>();
 		Pair<Integer> t = new Pair<>();
 		// 运行时的类型查询只产生原始类型
@@ -20,7 +20,7 @@ public class Generic {
 			System.out.println("p.getClass() == t.getClass()");
 		}
 		// 不能初始化参数化类型数组
-		// Pair<String> [] ps = new Pair<String>[2];
+		// Pair<String> [] pss = new Pair<String>[2];
 		Pair<?> [] ps = new Pair[2];
 		System.out.println(ps.length);
 		String [] s = new String [] {"1001", "1002", "1003"};

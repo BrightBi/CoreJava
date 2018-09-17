@@ -36,9 +36,10 @@ import java.util.stream.Stream;
  * 预定义函数式接口(通常我们不需要自己定义函数式接口，Java已经提供了一些预定义的函数式接口)
  * UnaryOperator<T>		对类型为T的对象应用一元运算并返回结果，方法名为apply
  * BinaryOperator<T>	对类型为T的两个对象进行操作并返回结果，方法名为apply。
- * Consumer<T>			对类型为T的对象应用操作，方法名为accept。
- * Supplier<T>			返回类型为T的对象，方法名为get。
+ * Consumer<T>			对类型为T的对象应用操作，无返回值，方法名为accept。
+ * Supplier<T>			返回类型为T的对象，无入参，方法名为get。
  * Function<T, R>		对类型为T的对象应用操作，并返回类型为R的对象，方法名为apply。
+ * BiFunction<T, U, R>  对类型为T和U的两个参数对象应用操作，并返回类型为R的对象，方法名为apply。
  * Predicate<T>			确定类型为T的对象是否满足某种约束，返回布尔值，方法名为test。
  * 
  * 高阶函数：可以接收函数，可以创建函数，可以返回函数
@@ -46,9 +47,11 @@ import java.util.stream.Stream;
 public class JavaEightNewFeature {
 
 	public static void main(String[] args) {
-		holdStatic();
-		List<String> names = Arrays.asList("Dory", "Gill", "Bruce", "Nemo", "Darla", "Marlin", "Jacques");
-		findNemo(names);
+		// holdStatic();
+		// List<String> names = Arrays.asList("Dory", "Gill", "Bruce", "Nemo", "Darla", "Marlin", "Jacques");
+		// findNemo(names);
+		// omitType();
+		lambdaException();
 	}
 
 	public static int findFirstOrElse() {
@@ -117,18 +120,10 @@ public class JavaEightNewFeature {
 				break;
 			}
 		}
-		if (found) {
-			System.out.println("Found Nemo");
-		} else {
-			System.out.println("Sorry, Nemo not found");
-		}
+		System.out.println("Found Nemo ? :" + found);
 
 		// 声明式：
-		if (names.contains("Nemo")) {
-			System.out.println("Found Nemo");
-		} else {
-			System.out.println("Sorry, Nemo not found");
-		}
+		System.out.println("Found Nemo ? :" + names.contains("Nemo"));
 
 		// 函数式：
 		Map<String, Integer> pageVisits = new HashMap<>();
@@ -136,13 +131,11 @@ public class JavaEightNewFeature {
 		pageVisits.merge(page, 1, (oldValue, value) -> oldValue + value);
 	}
 
-	public static List<String> methodIndteadLambda() {
-		List<Car> cars = Arrays.asList(new Car("Jeep", "Wrangler", 2011), new Car("Jeep", "Comanche", 1990),
-				new Car("Dodge", "Avenger", 2010), new Car("Buick", "Cascada", 2016), new Car("Ford", "Focus", 2012),
-				new Car("Chevrolet", "Geo Metro", 1992));
+	public static List<String> methodInsteadLambda() {
+		List<Car> cars = Arrays.asList(new Car("Dodge", "Avenger", 2010), new Car("Buick", "Cascada", 2016), new Car("Ford", "Focus", 2012));
 		return cars.stream().filter(car -> car.getYear() > 2000)
-				// 将方法引用 Car::getYear 传递给 comparing 方法，而不传递 car -> car.getYear()。方法引用简短、简洁且富于表达。尽可能地使用它们。
-				.sorted(Comparator.comparing(Car::getYear)).map(Car::getModel).collect(Collectors.toList());
+			// 将方法引用 Car::getYear 传递给 comparing 方法，而不传递 car -> car.getYear()。方法引用简短、简洁且富于表达。尽可能地使用它们。
+			.sorted(Comparator.comparing(Car::getYear)).map(Car::getModel).collect(Collectors.toList());
 	}
 
 	public static void insteadFor() {
@@ -163,7 +156,7 @@ public class JavaEightNewFeature {
 		IntStream.range(1, 4).forEach(i -> System.out.print(i + "..."));
 	}
 
-	// lambda 表达式可以抛出异常，如果抛出经检查的异常，就必须与函数式接口的抽象方法 throws 语句所列出的异常兼容
+	// lambda 表达式可以抛出异常，如果抛出经检查的异常，就必须与函数式接口的抽象方法 throws 语句所列出的异常兼容(lambda 抛出异常类型为其实现的接口抛出异常类型或子类)
 	public static void lambdaException() {
 		MyNumber number = (arr) -> {
 			if (arr.length == 0) {
@@ -178,7 +171,7 @@ public class JavaEightNewFeature {
 		};
 		try {
 			System.out.println(number.getAvr());
-		} catch (EmptyArrayException exc) {
+		} catch (Exception exc) {
 			System.out.println(exc.getMessage());
 		}
 	}
