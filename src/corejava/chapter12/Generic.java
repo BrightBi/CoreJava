@@ -15,11 +15,16 @@ public class Generic {
 		// Pair<int> p = new Pair<>();
 		Pair<Integer> t = new Pair<>();
 		// 运行时的类型查询只产生原始类型
-		System.out.println((p instanceof Pair<?>) + " | " + (p instanceof Pair));
-		if (p.getClass() == t.getClass()) {
-			System.out.println("p.getClass() == t.getClass()");
-		}
+		System.out.println("(p instanceof Pair<?>) | (p instanceof Pair) : " + (p instanceof Pair<?>) + " | " + (p instanceof Pair));
+		System.out.println("p.getClass() == t.getClass() : " + (p.getClass() == t.getClass()));
 		// 不能初始化参数化类型数组
+		/*
+		由于泛型存在擦除机制，所以 Pair<String> [] pss = new Pair<String>[2]; 会变成 Pair [] pss = new Pair[2];
+		然后问题就来了，你可以将 pss 转成 Object[] 类型，然后往 pss 里面任意塞东西（object类型嘛），如 pss[0] = new Integer(0)。
+		显然这样的赋值是要报错的，ArrayStoreException。因为，虽然有擦除，但是有“补偿”(就是数组会记住自己实际的存储类型，这里就是 String 类型)。
+		所以你存入 Integer 类型的那句话就出错了，但从理论上往 Object 类型的数组中存 Integer 类型又是合法的。
+		故为了避免这种矛盾，不允许创建参数化类型的数组
+		*/
 		// Pair<String> [] pss = new Pair<String>[2];
 		Pair<?> [] ps = new Pair[2];
 		System.out.println(ps.length);
@@ -84,8 +89,7 @@ class GenericMethod {
 	
 	// 问号是通配符，? super Color 此处表示可变参数是 Color 或者入参的父类是 Color
 	public static void setTemp (Pair<? super Color> t) {
-		Object o = t.getFirst();
-		o.getClass();
+		t.getFirst();
 	}
 	
 	public static <T> T getMiddle (T [] t) {
@@ -129,8 +133,13 @@ class GenericMethod {
 class Pair<T> {
 	private T first;
 	private T last;
-	// 不能在静态域中使用类型变量
+	// 不能在静态域和静态方法中使用类型变量
 	// public static T test;
+	/*
+	public static T test(T last) {
+		return last;
+	}
+	*/
 	
 	public Pair () {
 		this.first = null;
@@ -143,13 +152,6 @@ class Pair<T> {
 		this.first = first;
 		this.last = last;
 	}
-	
-	// 不能在静态方法中使用类型变量
-	/*
-	public static T test(T last) {
-		return last;
-	}
-	*/
 	
 	public T getFirst() {
 		return first;
