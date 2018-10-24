@@ -27,8 +27,8 @@ public class EnumClass {
 
 // 所有 枚举类型都是 Enum 类的子类
 enum Size {
-	SMALL("S"), MEDIUM("S"), LAGE("S"); // 每一个都是 Size 的一个实例
-	private Size(String abbreviation) { this.abbreviation = abbreviation; };
+	SMALL("S"), MEDIUM("M"), LAGE("L"); // 每一个都是 Size 的一个实例
+	private Size (String abbreviation) { this.abbreviation = abbreviation; };
 	public String getAbbreviation() { return this.abbreviation; }
 	private String abbreviation;
 }

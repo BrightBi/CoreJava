@@ -8,6 +8,11 @@ public abstract class Animal {
 	// 因为抽象方法需要被子类继承实现，所以抽象类中的抽象方法不能定义成 static 或者 private
 	// public static abstract String getAge();
 	
+	// Java 8 之后抽象类以及接口可以定义 static 方法
+	static String staticMethod (String description) {
+		return "StaticMethod: " + description;
+	}
+	
 	public String getName() {
 		return "";
 	}

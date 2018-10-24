@@ -6,10 +6,10 @@ public class Loop {
     public static void main(String[] args) {
         // 对于浮点数，不要使用等于或者不等于来判断，应为不精确，容易产生不可预料的错误
         // floatLoop();
-        // breakLoop();
+        breakLoop();
         // break 也可以中断 语句块
-        breakIf(11);
-        switchCase(2);
+        // breakIf(11);
+        // switchCase(2);
     }
 
     public static void switchCase(int c) {

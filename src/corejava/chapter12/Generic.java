@@ -1,23 +1,40 @@
 package corejava.chapter12;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 
 /*
  * 范型是为了能够让编写的代码被不同的类型使用，并避免类型转换
  * 比如，作为容器类，我们并不想为 String 或者 Integer 单独编写对应的 List
+ * 使用泛型的时候加上的类型参数，会被编译器在编译的时候去掉，JVM 没有范型概念
+
+ * 类型察除引起的问题
+ * 泛型类并没有自己独有的Class类对象。
+   比如并不存在List<String>.class或是List<Integer>.class，而只有List.class。
+
+ * 静态变量是被泛型类的所有实例所共享的。对于声明为MyClass<T>的类，访问其中的静态变量的方法仍然是 MyClass.myStaticVar。
+   不管是通过new MyClass<String>还是new MyClass<Integer>创建的对象，都是共享一个静态变量。
+ 
+ * 泛型的类型参数不能用在Java异常处理的catch语句中。因为异常处理是由JVM在运行时刻来进行的。
+   由于类型信息被擦除，JVM是无法区分两个异常类型MyException<String>和MyException<Integer>的。
+   对于JVM来说，它们都是 MyException类型的。也就无法执行与异常对应的catch语句。
  */
 public class Generic {
 
 	public static void main(String[] args) {
-		Pair<String> p = new Pair<>();
+		Pair<String> p = new Pair<String>();
 		p.setFirst("first");
 		// 不能用基础类型实例化类型参数，原因在于类型察除以后 Object 没法代替 int 等基本数据类型
 		// Pair<int> p = new Pair<>();
-		Pair<Integer> t = new Pair<>();
+		Pair<Integer> t = new Pair<Integer>();
 		// 运行时的类型查询只产生原始类型
 		System.out.println("(p instanceof Pair<?>) | (p instanceof Pair) : " + (p instanceof Pair<?>) + " | " + (p instanceof Pair));
 		System.out.println("p.getClass() == t.getClass() : " + (p.getClass() == t.getClass()));
-		// 不能初始化参数化类型数组
+		// 不能初始化参数化类型数组。即，泛型数组初始化时不能声明泛型类型
+		// Pair<String> [] pss = new Pair<String>[2];
 		/*
 		由于泛型存在擦除机制，所以 Pair<String> [] pss = new Pair<String>[2]; 会变成 Pair [] pss = new Pair[2];
 		然后问题就来了，你可以将 pss 转成 Object[] 类型，然后往 pss 里面任意塞东西（object类型嘛），如 pss[0] = new Integer(0)。
@@ -25,16 +42,60 @@ public class Generic {
 		所以你存入 Integer 类型的那句话就出错了，但从理论上往 Object 类型的数组中存 Integer 类型又是合法的。
 		故为了避免这种矛盾，不允许创建参数化类型的数组
 		*/
-		// Pair<String> [] pss = new Pair<String>[2];
 		Pair<?> [] ps = new Pair[2];
-		System.out.println(ps.length);
-		String [] s = new String [] {"1001", "1002", "1003"};
-		String m = GenericMethod.getMiddle(s); // 此处可以写成 GenericMethod.<String>getMiddle(s);
+		ps[0] = new Pair<String>();
+		ps[1] = new Pair<MyColor>();
+		System.out.println(ps[0] + "" + ps[1]);
+		
+		Object o = null;
+		String s = null;
+		List<?> list = new ArrayList<String>();
+		list.add(null);
+		// list.add(s); // 报错
+		// list.add(o); // 报错
+		// 带通配符的泛型类没法使用 add 方法，应为不知道具体类型所以没法 add。除非 add(null)
+		// s = list.get(0); // 报错
+		o = list.get(0);
+		// 带通配符的泛型类使用 get 方法只能 get Object
+		System.out.println("s:" + s + "| o:" + o);
+		
+		String [] ss = new String [] {"1001", "1002", "1003"};
+		String m = GenericMethod.getMiddle(ss); // 此处可以写成 GenericMethod.<String>getMiddle(s);
 		System.out.println(m);
 		MyColor [] ms = new MyColor [] {new MyColor(1), new MyColor(2), new MyColor(3)};
 		System.out.println(GenericMethod.getMaxInputNumber(ms, new MyColor(5)));
 		System.out.println(GenericMethod.getTemp(new Pair<Color>(new Color(1), new Color(2))).getId());
 		GenericMethod.setTemp(new Pair<Color>());
+		
+		// 类型关系
+		List<String> listString = new ArrayList<>();
+		List<Object> listObject = new ArrayList<>();
+		List<? extends Object> listExtendsObject = new ArrayList<>();
+		Collection<String> collectionString = new HashSet<>();
+		Collection<Object> collectionObject = new HashSet<>();
+		Collection<? extends Object> collectionExtendsObject = new HashSet<>();
+
+		// listObject = listString; // error
+
+		listExtendsObject = listString;
+		listExtendsObject = listObject;
+
+		collectionString = listString;
+		// collectionString = listObject; // error
+		// collectionString = listExtendsObject; // error
+
+		// collectionObject = listString; // error
+		collectionObject = listObject;
+		// collectionObject = listExtendsObject;
+		// collectionObject = collectionString; // error
+
+		collectionExtendsObject = listString;
+		collectionExtendsObject = listObject;
+		collectionExtendsObject = listExtendsObject;
+		collectionExtendsObject = collectionString;
+		collectionExtendsObject = collectionObject;
+
+		System.out.println("Done:" + collectionExtendsObject);
 	}
 
 }
