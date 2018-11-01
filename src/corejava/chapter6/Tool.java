@@ -14,7 +14,7 @@ public interface Tool {
 	String WEIGHT = "W";
 	public static final String CATEGORY = "T"; // 此处 public static final 可以像上面一样省略
 	String getToolName();
-	public abstract void work(); // 此处 public 可以像上面一样省略
+	public abstract void work(); // 此处 public abstract 可以像上面一样省略
 }
 
 // 接口继承多个接口
