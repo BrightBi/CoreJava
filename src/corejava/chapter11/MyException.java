@@ -13,6 +13,7 @@ public class MyException {
 			exception.initCause(e); // 将引发异常的原始异常设置到新异常中，后续可以通过 exception.getCause() 得到原始异常
 			throw exception;
 		} catch (Exception e) { // Exception 范围大于 SelfException，需要写在后面
+			System.out.println("In main catch (Exception)");
 			e.printStackTrace();
 		}
 	}

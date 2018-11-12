@@ -45,7 +45,7 @@ public class Generic {
 		Pair<?> [] ps = new Pair[2];
 		ps[0] = new Pair<String>();
 		ps[1] = new Pair<MyColor>();
-		System.out.println(ps[0] + "" + ps[1]);
+		System.out.println("ps[0]:" + ps[0] + "| ps[1]:" + ps[1]);
 		
 		Object o = null;
 		String s = null;
@@ -53,7 +53,7 @@ public class Generic {
 		list.add(null);
 		// list.add(s); // 报错
 		// list.add(o); // 报错
-		// 带通配符的泛型类没法使用 add 方法，应为不知道具体类型所以没法 add。除非 add(null)
+		// 带通配符的泛型类没法使用 add 方法，因为不知道具体类型所以没法 add。除非 add(null)
 		// s = list.get(0); // 报错
 		o = list.get(0);
 		// 带通配符的泛型类使用 get 方法只能 get Object
@@ -66,6 +66,7 @@ public class Generic {
 		System.out.println(GenericMethod.getMaxInputNumber(ms, new MyColor(5)));
 		System.out.println(GenericMethod.getTemp(new Pair<Color>(new Color(1), new Color(2))).getId());
 		GenericMethod.setTemp(new Pair<Color>());
+		GenericMethod.setTemp(new Pair<Object>());
 		
 		// 类型关系
 		List<String> listString = new ArrayList<>();
@@ -148,7 +149,7 @@ class GenericMethod {
 		return t.getFirst();
 	}
 	
-	// 问号是通配符，? super Color 此处表示可变参数是 Color 或者入参的父类是 Color
+	// 问号是通配符，? super Color 此处表示可变参数是 Color 或者入参是 Color 的父类
 	public static void setTemp (Pair<? super Color> t) {
 		t.getFirst();
 	}

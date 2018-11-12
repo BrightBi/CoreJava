@@ -47,12 +47,7 @@ public class AboutCollection {
 	}
 	
 	public static void collectionView() {
-		Collections.sort(new ArrayList<Worker>(), new Comparator<Worker>(){
-			@Override
-			public int compare(Worker o1, Worker o2) {
-				return o1.getId() - o2.getId();
-			}
-		});// 对集合排序
+		Collections.sort(new ArrayList<Worker>(), (o1, o2) -> o1.getId() - o2.getId());// 对集合排序
 		Collections.shuffle(new ArrayList<String>());// 对集合混排
 		Map<String, String> mapNoSynchronized = new HashMap<>();// 非线程同步
 		Map<String, String> mapSynchronized = Collections.synchronizedMap(mapNoSynchronized);// 线程同步
@@ -77,12 +72,7 @@ public class AboutCollection {
 		}
 		
 		// 像这种没有实现接口的 Worker 类可以通过初始化 PriorityQueue 时候传入个比较器 Comparator
-		PriorityQueue<Worker> priorityWorker = new PriorityQueue<>(new Comparator<Worker>(){
-			@Override
-			public int compare(Worker o1, Worker o2) {
-				return o1.getId() - o2.getId();
-			}
-		}) ;
+		PriorityQueue<Worker> priorityWorker = new PriorityQueue<>((o1, o2) -> o1.getId() - o2.getId());
 		priorityWorker.add(new Worker(7));
 		priorityWorker.add(new Worker(3));
 		priorityWorker.add(new Worker(9));
@@ -114,12 +104,7 @@ public class AboutCollection {
 		System.out.println(sortedString);
 		
 		// 像这种没有实现接口的 Worker 类可以通过初始化 SortedSet 时候传入个比较器 Comparator
-		SortedSet<Worker> sortedWorker = new TreeSet<>(new Comparator<Worker>(){
-			@Override
-			public int compare(Worker o1, Worker o2) {
-				return o1.getId() - o2.getId();
-			}
-		}) ;
+		SortedSet<Worker> sortedWorker = new TreeSet<>((o1, o2) -> o1.getId() - o2.getId());
 		sortedWorker.add(new Worker(7));
 		sortedWorker.add(new Worker(3));
 		sortedWorker.add(new Worker(9));
