@@ -20,6 +20,12 @@ import java.util.concurrent.locks.ReentrantLock;
  * java.util.concurrent 下包含了许多用于编写并发程序的类
  * 
  * 线程挂起时可以按 Contrl + \ 会得到一个所有线程的列表
+ * 
+ * 阻塞队列可以实现线程同步的部分功能，比较重要，需要详细学习
+ * java.util.concurrent 包中提供的 ConcurrentHashMap ConcurrentSkipListMap ConcurrentSkipListSet ConcurrentLinkedQueue 高效处理
+ * java.util.concurrent 中的 Callable Future ExecutorService ScheduledExecutorService ExecutorCompletionService
+ * 线程池
+ * 
  */
 public class TestThread {
 	
