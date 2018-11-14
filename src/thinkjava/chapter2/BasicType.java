@@ -23,7 +23,7 @@ public class BasicType {
 	@SuppressWarnings("unused") // 忽略警告
 	public void localVariable(int i) { // 方法名和参数列表被成为“方法签名”，唯一标识一个方法
 		int var;
-		// System.out.println(var); Java 不允许使用使用未初始化的局部变量
+		// System.out.println(var); // Java 不允许使用使用未初始化的局部变量
 	}
 
 	@Deprecated // 弃用紧邻标签的属性

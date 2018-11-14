@@ -5,12 +5,12 @@ import java.util.Random;
 public class BasicOperator {
 
 	public static void main(String[] args) {
-		Random random = new Random(7); // 随机数生成器对于特定种子，总是产生相同的随机数序列
+		Random random = new Random(7); 
 		int i = random.nextInt(99);
 		System.out.println(i);
 		
 		byte t = 7;
-		// short s = +b; // 加号只是为了与减号对应，唯一作用仅是将较小类型操作数提升为 int
+		// short s = +t; // 加号只是为了与减号对应，唯一作用仅是将较小类型操作数提升为 int
 		System.out.println(t + ":" + (++t)); // 先执行 ++ 运算，再生成值
 		System.out.println(t + ":" + (t++)); // 先生成值，再执行 ++ 运算
 		System.out.println(t);
@@ -31,7 +31,6 @@ public class BasicOperator {
 		b = b || c;
 		b = b == c;
 		b = b != c;
-		
 
 		// 移位操作符只能用来处理整数类型，char byte short 在做位移操作会先转换成 int 再做位移操作，结果也是 int 类型
 
