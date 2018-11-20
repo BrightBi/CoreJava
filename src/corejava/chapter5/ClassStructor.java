@@ -43,6 +43,7 @@ public class ClassStructor {
 /*
  * 子类构造函数中只能调用一次自身的其他构造函数或者父类构造函数，
  * 且这个调用要位于构造函数的第一句
+ * 只能在构造函数内调用其他构造函数，不可以在其他函数中调用构造函数
  */
 class SubClassStructor extends ClassStructor {
 	

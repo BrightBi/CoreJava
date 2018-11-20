@@ -16,8 +16,8 @@ public class BasicType {
 	// 每个基本类型都对应一个包装类型
 	
 	public static void main(String[] args) {
-		System.out.println(System.getProperty("user.name")); // return 3
-		System.out.println(System.getProperty("java.library.path")); // return 1
+		System.out.println(System.getProperty("user.name"));
+		System.out.println(System.getProperty("java.library.path"));
 	}
 
 	@SuppressWarnings("unused") // 忽略警告

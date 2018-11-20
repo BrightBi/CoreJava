@@ -5,7 +5,6 @@ import java.util.Random;
 public class WorkFlow {
 
 	public static void main(String[] args) {
-
 		// switchCase("s");
 		testRandom();
 		// Java 中使用带标签 break／continue 唯一理由就是处理循环嵌套
@@ -23,7 +22,6 @@ public class WorkFlow {
 		for (int i = 0; i < 10; i++) {
 			System.out.println(random.nextInt(5)); // 随机生成一个 0 到 5 之间的一个整数，含 0 不含 5.
 		}
-		
 	}
 
 	/*
@@ -40,7 +38,6 @@ public class WorkFlow {
 	}
 
 	public static void testFor() {
-
 		for (int i = 1, j = i + 3; i < j; i = i + 3, j++) {
 			System.out.println("i=" + i + " | j=" + j);
 		}
