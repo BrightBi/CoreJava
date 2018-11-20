@@ -12,7 +12,7 @@ package thinkjava.chapter5;
 public class InitialValue {
 
 	public static void main(String[] args) {
-		System.out.println(new Initial().getInfo());
+		System.out.println(new Initial().getInfo()); // Id is 7. null|1
 	}
 }
 
@@ -24,7 +24,7 @@ class Initial {
 	private int id = 7;
 	
 	public String getInfo (int value) {
-		return "Value is " + value;
+		return this.info + "|" + value;
 	}
 	
 	public String getInfo () {
