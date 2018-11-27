@@ -15,7 +15,7 @@ public class AboutFinal {
 	}
 }
 /*
- * 对于 final 域，必须在定义处或者构造块或构造函数中进行初始化
+ * 对于 非 static final 域，必须在定义处或者构造块或构造函数中进行初始化
  * 对于 static final 域，必须在定义处或者静态构造块中进行初始化
  */
 class ForFinal {
