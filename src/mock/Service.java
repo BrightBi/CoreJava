@@ -24,13 +24,25 @@ public class Service {
 		Cat cat = new Cat(name);
 		tool.saveCat(cat);
 	}
-	
+
+	public void updateCatNameByTool(String name) {
+		tool.updateCatName(name);
+	}
+
 	public String getToolDefaultCatName() {
 		return tool.getDefaultName();
 	}
-	
-	public void testException(String name) throws Exception{
+
+	public void testException(String name) throws Exception {
 		Cat me = new Cat(name);
 		tool.aboutException(me);
+	}
+
+	public void testArgs(int a, int b, int c) {
+		tool.sum(a, b, c);
+	}
+
+	public Cat getCatByName(String name) {
+		return tool.getCat(name);
 	}
 }
