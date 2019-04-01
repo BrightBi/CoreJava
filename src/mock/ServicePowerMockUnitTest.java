@@ -1,4 +1,4 @@
-package mock.power;
+package mock;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -8,8 +8,8 @@ import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import mock.Cat;
-import mock.Service;
+import mock.object.Cat;
+import mock.object.Service;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({ Service.class})
@@ -22,8 +22,6 @@ public class ServicePowerMockUnitTest {
 		Cat cat = new Cat("new");
 		Service service = PowerMockito.mock(Service.class);
 		PowerMockito.when(service.getCatByName(name)).thenReturn(cat);
-		// can not stub like this
-		//PowerMockito.doReturn(cat).when(service.getCatByName(name));
 		Cat result = service.getCatByName(name);
 		Assert.assertEquals(cat, result);
 	}

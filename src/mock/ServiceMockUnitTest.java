@@ -10,6 +10,10 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.powermock.api.support.membermodification.MemberModifier;
 
+import mock.object.Cat;
+import mock.object.Service;
+import mock.object.Tool;
+
 public class ServiceMockUnitTest {
 
 	@Test

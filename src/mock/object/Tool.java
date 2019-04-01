@@ -1,4 +1,4 @@
-package mock;
+package mock.object;
 
 public class Tool {
 
