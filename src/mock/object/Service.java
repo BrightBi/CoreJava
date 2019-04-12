@@ -33,9 +33,32 @@ public class Service {
 		return tool.getDefaultName();
 	}
 
-	public void testException(String name) throws Exception {
+	public String testException(String name) {
 		Cat me = new Cat(name);
+		String s = "No exception";
+		try {
+			tool.aboutException(me);
+		} catch (Exception e) {
+			s = "Exception happen";
+		}
+		return s;
+	}
+	
+	public String testExceptionWithReturn(String name) {
+		Cat me = new Cat(name);
+		String s = "No exception";
+		try {
+			s = tool.aboutExceptionWithReturn(me);
+		} catch (Exception e) {
+			s = "Exception happen";
+		}
+		return s;
+	}
+
+	public String testException() throws Exception {
+		Cat me = new Cat("Cat");
 		tool.aboutException(me);
+		return "";
 	}
 
 	public void testArgs(int a, int b, int c) {
@@ -43,6 +66,29 @@ public class Service {
 	}
 
 	public Cat getCatByName(String name) {
-		return tool.getCat(name);
+		Cat cat = tool.getCat(name);
+		return cat;
+	}
+	
+	public String getStaticValue(String name) {
+		String str = Tool.getStaticValue(name);
+		return str;
+	}
+	
+	public boolean isExist(int id) {
+		int catId = tool.randum();
+		return verifyMod(id, catId);
+	}
+	
+	public House getHouse() {
+		return new House();
+	}
+
+	private boolean verifyMod(int id, int catId) {
+		if (id <= catId) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

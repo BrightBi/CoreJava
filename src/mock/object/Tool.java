@@ -17,6 +17,10 @@ public class Tool {
 		System.out.println(c.getName());
 	}
 
+	public String aboutExceptionWithReturn(Cat c) throws Exception {
+		return c.getName();
+	}
+
 	public Cat findCat(Cat c) {
 		return new Cat(c.getName() + "cc");
 	}
@@ -34,6 +38,16 @@ public class Tool {
 	}
 
 	public Cat getCat(String name) {
-		return new Cat(name);
+		Cat cat = new Cat(name);
+		return cat;
+	}
+	
+	public static String getStaticValue(String name) {
+		String s = "static: " + name;
+		return s;
+	}
+	
+	public int randum() {
+		return (int) (Math.random() * 10);
 	}
 }
