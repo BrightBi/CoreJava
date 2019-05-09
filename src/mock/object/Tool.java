@@ -47,7 +47,24 @@ public class Tool {
 		return s;
 	}
 	
+	public static void updateValue(House house) {
+		house.setName("new update name");
+		System.out.println("nothing");
+	}
+	
+	public boolean validate() {
+		return true;
+	}
+	
+	public final boolean isFinal() {
+		return true;
+	}
+	
 	public int randum() {
 		return (int) (Math.random() * 10);
+	}
+
+	public boolean manyParameters(int in, String s, House house) {
+		return false;
 	}
 }

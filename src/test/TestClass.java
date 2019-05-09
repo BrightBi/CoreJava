@@ -6,10 +6,12 @@ public class TestClass {
 
 	public static void main(String[] args) {
 
-		FileOne f1 = FileOne.INITIALIZED;
-		FileOne f2 = FileOne.INITIALIZED;
-		
-		System.out.println(f1 == f2);
+		Result result1 = null;
+		Result result2 = new Result(false);
+		Result result3 = Optional.ofNullable(result1).map(u -> {u.setDetail("111"); return u;}).orElse(result2);
+		System.out.println(result1);
+		System.out.println(result2);
+		System.out.println(result3);
 
 	}
 	

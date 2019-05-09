@@ -5,17 +5,23 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Matchers;
 import org.mockito.Mock;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PowerMockIgnore;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import mock.object.Cat;
+import mock.object.ChildService;
 import mock.object.House;
 import mock.object.Service;
 import mock.object.Tool;
@@ -27,6 +33,8 @@ public class ServicePowerMockUnitTest {
 
 	@Mock
 	private Tool tool;
+
+	private List<House> nodes = new ArrayList<House>();
 
 	@Test
 	public void testAnnotationInject() {
@@ -109,7 +117,18 @@ public class ServicePowerMockUnitTest {
 	}
 
 	@Test
-	public void testPowerPrivate() throws Exception {
+	@PrepareForTest(House.class)
+	public void testPrivateByPowerMock1() throws Exception {
+		String name = "PowerMockito formateName";
+		House house = PowerMockito.mock(House.class);
+		PowerMockito.when(house.getNameDetail()).thenCallRealMethod();
+		PowerMockito.when(house, "formateName", 9, "CN").thenReturn(name);
+		String value = house.getNameDetail();
+		Assert.assertEquals(name, value);
+	}
+
+	@Test
+	public void testPrivateByPowerMock() throws Exception {
 		showClassLoader("testPowerPrivate");
 		String s = "formate: null 3 RS";
 		House house = PowerMockito.mock(House.class);
@@ -128,6 +147,94 @@ public class ServicePowerMockUnitTest {
 		House value = service.getHouse();
 		System.out.println("value: " + value);
 		Assert.assertEquals("my name", value.getName());
+	}
+
+	@Test
+	public void testPowerMockStaticVoid() throws Exception {
+		showClassLoader("testPowerMockStaticVoid");
+		House h = new House();
+		h.setName("my name");
+		PowerMockito.mockStatic(Tool.class);
+		PowerMockito.doNothing().when(Tool.class, "updateValue", h);
+
+		Service service = new Service();
+		House value = service.updateHouse(h);
+		Assert.assertEquals("my name", value.getName());
+	}
+
+	@Test
+	public void testPowerMockDifferReturn() throws Exception {
+		showClassLoader("testPowerMockDifferReturn");
+		// thenReturn(true, true, false); 表示第一次调用返回 true，第二次调用返回 true，第三次调用返回 false。
+		PowerMockito.when(tool.validate()).thenReturn(true, true, false);
+		Service service = new Service();
+		service.setTool(tool);
+		int value = service.validate();
+		Assert.assertEquals(2, value);
+	}
+
+	@Test
+	public void testPowerMockAnswer() throws Exception {
+		showClassLoader("testPowerMockDifferReturn");
+		House h = new House();
+		h.setName("my name");
+		nodes.add(h);
+		PowerMockito.whenNew(ArrayList.class).withNoArguments().thenAnswer(new Answer<List<House>>() {
+			@Override
+			public List<House> answer(InvocationOnMock invocation) throws Throwable {
+				return nodes;
+			}
+		});
+		Service service = new Service();
+		List<House> value = service.housList();
+		Assert.assertEquals(2, value.size());
+	}
+
+	@Test
+	public void testPowerMockFinal() throws Exception {
+		showClassLoader("testPowerMockFinal");
+		// final 与普通方法一样mock，但是需要将其所在 class 添加到 @PrepareForTest 注解中
+		Tool tool = PowerMockito.mock(Tool.class);
+		PowerMockito.when(tool.isFinal()).thenReturn(false);
+		Service service = new Service();
+		service.setTool(tool);
+		boolean result = service.isFinal();
+		Assert.assertEquals(false, result);
+	}
+
+	@Test
+	public void testPowerMockSuppress() throws Exception {
+		ChildService cs = PowerMockito.spy(new ChildService());
+		PowerMockito.suppress(PowerMockito.method(Service.class, "init", House.class));
+		House house = new House();
+		house.setName("ChildService");
+		String value = cs.getSelfHouseName(house);
+		Assert.assertEquals("ChildService", value);
+	}
+
+	@Test
+	public void testPowerMockCareful() throws Exception {
+		Service s = PowerMockito.spy(new Service());
+		List<House> list = new ArrayList<House>();
+		list.add(new House());
+		list.add(new House());
+		// 也可以使用这种方式，都可以
+		// PowerMockito.when(s.getChildren(Matchers.anyInt())).thenReturn(list);
+		PowerMockito.doReturn(list).when(s).getChildren(Matchers.anyInt());
+		List<House> result = new ArrayList<>();
+		s.getAllChildren(9, result);
+		Assert.assertEquals(2, result.size());
+	}
+
+	@Test
+	public void testPowerMockLotParameters() throws Exception {
+		// 如果对某一个参数使用了Matcher，那么，这个方法的所有其他参数也必须使用Matcher，否则将会报错。
+		PowerMockito.doReturn(true).when(tool).manyParameters(Matchers.anyInt(), Matchers.anyString(),
+				Matchers.any(House.class));
+		Service s = new Service();
+		s.setTool(tool);
+		boolean value = s.manyParameters(1, "", new House());
+		Assert.assertEquals(true, value);
 	}
 
 	private void showClassLoader(String methodName) {
