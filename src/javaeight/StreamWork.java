@@ -78,9 +78,8 @@ public class StreamWork {
 	// 迭代
 	public static void iterate() {
 		Stream.iterate(1, item -> item + 2).limit(10).forEach(System.out::println);
-		// Stream陷阱 distinct()会一直等待产生的结果去重，将distinct()和limit(6)调换位置，先限制结果集再去重就可以了
-		// IntStream.iterate(0,i -> (i + 1) %
-		// 2).distinct().limit(6).forEach(System.out::println);
+		// Stream 陷阱 distinct() 会一直等待产生的结果去重，将 distinct() 和 limit(6) 调换位置，先限制结果集再去重就可以了
+		// IntStream.iterate(0, i -> (i + 1) % 2).distinct().limit(6).forEach(System.out::println);
 		IntStream.iterate(0, i -> (i + 1) % 2).limit(6).distinct().forEach(System.out::println);
 	}
 
