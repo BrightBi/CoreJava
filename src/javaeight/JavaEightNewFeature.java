@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-/*
+/**
  * lambda 表达式是匿名函数，Lambda 表达式的格式：(参数) -> 表达式
  * (String first, String second) -> Integer.compare(first.length(), second.length())
  * 如果计算的结果并不由一个单一的表达式返回（换言之，返回值存在多种情况），使用“{}"，然后明确指定返回值。
@@ -34,24 +34,32 @@ import java.util.stream.Stream;
  *    确保该接口只有一个抽象方法。
  * 
  * 预定义函数式接口(通常我们不需要自己定义函数式接口，Java已经提供了一些预定义的函数式接口)
- * UnaryOperator<T>		对类型为T的对象应用一元运算并返回结果，方法名为apply
- * BinaryOperator<T>	对类型为T的两个对象进行操作并返回结果，方法名为apply。
- * Consumer<T>			对类型为T的对象应用操作，无返回值，方法名为accept。
- * Supplier<T>			返回类型为T的对象，无入参，方法名为get。
- * Function<T, R>		对类型为T的对象应用操作，并返回类型为R的对象，方法名为apply。
- * BiFunction<T, U, R>  对类型为T和U的两个参数对象应用操作，并返回类型为R的对象，方法名为apply。
+ * UnaryOperator<T>		对类型为T的对象应用一元运算并返回结果，方法名为 apply
+ * BinaryOperator<T>	对类型为T的两个对象进行操作并返回结果，方法名为 apply。
+ * Consumer<T>			对类型为T的对象应用操作，无返回值，方法名为 accept。
+ * Supplier<T>			返回类型为T的对象，无入参，方法名为 get。
+ * Function<T, R>		对类型为T的对象应用操作，并返回类型为R的对象，方法名为 apply。
+ * BiFunction<T, U, R>  对类型为T和U的两个参数对象应用操作，并返回类型为R的对象，方法名为 apply。
  * Predicate<T>			确定类型为T的对象是否满足某种约束，返回布尔值，方法名为test。
  * 
  * 高阶函数：可以接收函数，可以创建函数，可以返回函数
+ * 
+ * Lambda表达式和闭包(https://www.jianshu.com/p/c22db2a91989)
+ * 由于变量存在生命周期。例如，当我们在一个函数中声明一个变量后，在函数执行完毕后，这个变量将从该函数的栈内存空间中清除掉。
+ * 如果我们在一个 Lambda 表达式中使用了本地变量，该本地变量将会在函数的栈空间清理的时候被移除。
+ * 为了防止一个依赖于本地变量的 Lambda 表达式需要从函数中返回出去，编译器就会创建一个闭包，即一个包装器类。
+ * 闭包是一个自动生成的类，它含有 Lambda 表达式，并为每个被用到的本地变量生成一个字段。
+ * 这些本地变量的值会被复制到相应的字段中，以便扩展这些本地变量的生命周期。
  */
 public class JavaEightNewFeature {
 
 	public static void main(String[] args) {
-		// holdStatic();
-		// List<String> names = Arrays.asList("Dory", "Gill", "Bruce", "Nemo", "Darla", "Marlin", "Jacques");
-		// findNemo(names);
-		// omitType();
-		lambdaException();
+//		holdStatic();
+//		List<String> names = Arrays.asList("Dory", "Gill", "Bruce", "Nemo", "Darla", "Marlin", "Jacques");
+//		findNemo(names);
+//		omitType();
+//		lambdaException();
+		findFirstOrElse();
 	}
 
 	public static int findFirstOrElse() {
@@ -150,13 +158,14 @@ public class JavaEightNewFeature {
 
 	public static void omitType() {
 		IntStream.range(1, 4).forEach((int i) -> System.out.print(i + "..."));
-		// Java 能根据推断出 i 的类型，所以省略 类型能简化 lambda 表达式
+		// Java 能根据推断出 i 的类型，所以省略类型能简化 lambda 表达式
 		IntStream.range(1, 4).forEach((i) -> System.out.print(i + "..."));
 		// 简化类型以后，由于只有一个形参，所以 (i) 可以改写成 i；如果 lambda 表达式用的是多个参数，() 不可省略，必须使用 (x, y) -> ...
 		IntStream.range(1, 4).forEach(i -> System.out.print(i + "..."));
 	}
 
-	// lambda 表达式可以抛出异常，如果抛出经检查的异常，就必须与函数式接口的抽象方法 throws 语句所列出的异常兼容(lambda 抛出异常类型为其实现的接口抛出异常类型或子类)
+	// lambda 表达式可以抛出异常，如果抛出经检查的异常，就必须与函数式接口的抽象方法 throws 语句所列出的异常兼容
+	// (lambda 抛出异常类型为其实现的接口抛出异常类型或子类)
 	public static void lambdaException() {
 		MyNumber number = (arr) -> {
 			if (arr.length == 0) {
@@ -191,7 +200,7 @@ public class JavaEightNewFeature {
 		numbers.stream().filter(e -> e > 50).map(e -> e * 2).collect(Collectors.toList());
 		numbers.stream().filter(e -> e > 500).map(e -> e * 2).collect(Collectors.toList());
 
-		// e -> e > ? 重构, 思路是创建一个 函数／lambda 入参是一个入参是 Integer 出参 是 e -> e > ? 
+		// e -> e > ? 重构, 思路是创建一个 函数／lambda 入参是 Integer 出参 是 e -> e > ? 
 		// isGreaterThan1 是一个 Function，入参 Integer 返回一个 Predicate<Integer>；简单讲，传入 Integer 返回一个 lambda 表达式
 		Function<Integer, Predicate<Integer>> isGreaterThan1 =
 				(Integer pivot) -> {

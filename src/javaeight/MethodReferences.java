@@ -8,7 +8,12 @@ import java.util.List;
 import java.util.function.Supplier;
 
 class Person {
-	
+
+	private String name;
+	private LocalDate birthday;
+	private Sex gender;
+	private String emailAddress;
+
 	public Person() {
 		this.name = "Name";
 		this.birthday = LocalDate.now();
@@ -22,11 +27,6 @@ class Person {
 		this.gender = gender;
 		this.emailAddress = emailAddress;
 	}
-
-	String name;
-	LocalDate birthday;
-	Sex gender;
-	String emailAddress;
 
 	public String getEmailAddress() {
 		return emailAddress;
@@ -153,11 +153,11 @@ public class MethodReferences {
 		Arrays.sort(persons, new Comparator<Person>() {
 			@Override
 			public int compare(Person o1, Person o2) {
-				return o1.birthday.compareTo(o2.birthday);
+				return o1.getBirthday().compareTo(o2.getBirthday());
 			}
 		});
 		// 使用lambda表达式
-		Arrays.sort(persons, (o1, o2) -> o1.birthday.compareTo(o2.birthday));
+		Arrays.sort(persons, (o1, o2) -> o1.getBirthday().compareTo(o2.getBirthday()));
 		// 使用lambda表达式和类的静态方法
 		Arrays.sort(persons, (o1, o2) -> Person.compareByAge(o1, o2));
 		// 使用方法引用,引用的是类的静态方法

@@ -30,6 +30,14 @@ interface AbstractExtendInterface extends NewInterface {
 
 }
 
+interface DefaultExtendInterface extends NewInterface {
+	// 使用这种方式继承，会将父接口的抽象方法置成默认方法，实现类可以不重写默认方法
+	@Override
+	default String normal() {
+		return "Default normal";
+	}
+}
+
 interface OverrideExtendInterface extends NewInterface {
 	// 使用这种方式继承，会将父接口的默认方法重写，实现类可以重写默认方法，也可以不重写
 	// 不重写的话就使用当前接口中重写了的默认的实现方式
@@ -52,13 +60,17 @@ interface MultipleExtendInterface extends NewInterface, AnotherNewInterface {
 	@Override
 	default String defaultMethod(String info) {
 		return "Override Multiple Default: " + NewInterface.super.defaultMethod("use super") + info;
-		// 如果需要用到某个父接口的默认方法可以这样调用父接口方法 NewInterface.super.defaultMethod("use super")
+		// 如果需要用到某个父接口的默认方法可以这样调用父接口方法 Interface.super.Method()
 	}
 }
+
+class UseAllDefault implements DefaultExtendInterface { }
+
 /*
  * 1.当继承的父类和实现的接口中有相同签名的方法时，优先使用父类的方法。
  * 2.当接口的父接口中也有同样的默认方法时，就近原则调用子接口的方法。
- * 3.当实现的多个接口中有相同签名的方法时，必须在实现类中通过重写方法解决冲突问题，否者无法通过编译，在重写的方法中可以通过 接口名.super.方法名(); 的方式显示调用需要的方法。
+ * 3.当实现的多个接口中有相同签名的方法时，必须在实现类中通过重写方法解决冲突问题，否者无法通过编译，
+ *   在重写的方法中可以通过 接口名.super.方法名(); 的方式显示调用需要的方法。
  */
 class SuperClass {
 	public String defaultMethod(String info) {
@@ -100,6 +112,8 @@ class ManyInterface implements NewInterface, AnotherNewInterface {
 public class InterfaceForJavaEight {
 
 	public static void main(String [] args) {
+		System.out.println(new UseAllDefault().normal());// Default normal
+		System.out.println(new UseAllDefault().defaultMethod("test"));// Default: test
 		System.out.println(new ClassAndInterface().defaultMethod("test"));// SuperClass Default: test
 		System.out.println(new MultilayerInterface().defaultMethod("test"));// Override Default: test
 		System.out.println(new ManyInterface().defaultMethod("test"));// ManyInterface Default: Another Default: test
