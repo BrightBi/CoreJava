@@ -15,6 +15,7 @@ public class BasicOperator {
 		System.out.println(t + ":" + (t++)); // 先生成值，再执行 ++ 运算
 		System.out.println(t);
 		
+		// 与(&)、或(|)、异或(^)、取反(~)
 		i &= t;
 		i |= t;
 		i ^= t;

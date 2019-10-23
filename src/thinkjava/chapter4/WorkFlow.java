@@ -5,8 +5,9 @@ import java.util.Random;
 public class WorkFlow {
 
 	public static void main(String[] args) {
-		// switchCase("s");
-		testRandom();
+		switchCase("sss");
+		// testRandom();
+		// testFor();
 		// Java 中使用带标签 break／continue 唯一理由就是处理循环嵌套
 	}
 	
@@ -49,7 +50,7 @@ public class WorkFlow {
 	}
 
 	public static void switchCase(String c) {
-		// case 标签必须是整数或枚举常量（现在String也可以）
+		// case 标签必须是整数(byte char short int)或枚举常量或 String
 		// case 语句中可以使用 break 来中断顺次执行
 		switch (c) {
 		case "s":
