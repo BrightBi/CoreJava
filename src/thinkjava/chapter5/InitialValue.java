@@ -13,6 +13,7 @@ public class InitialValue {
 
 	public static void main(String[] args) {
 		System.out.println(new Initial().getInfo()); // Id is 7. null|1
+		System.out.println(new FinalValue().getInfo()); // null - null - 9 - 8 || null - 9
 	}
 }
 
@@ -29,5 +30,23 @@ class Initial {
 	
 	public String getInfo () {
 		return "Id is " + this.id + ". " + this.info;
+	}
+}
+
+class FinalValue {
+	// final 定义的变量需要先初始化然后再使用，这里变相的拿到未初始化的 final 变量值
+	private final String s = getFinal (8);
+	private static final String ss = getStaticFinal (9);
+	
+	public String getFinal (int value) {
+		return this.s + " - " + ss + " - " + value;
+	}
+	
+	public static String getStaticFinal (int value) {
+		return ss + " - " + value;
+	}
+	
+	public String getInfo () {
+		return this.s + " || " + ss;
 	}
 }
