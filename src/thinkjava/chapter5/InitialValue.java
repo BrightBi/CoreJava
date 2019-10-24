@@ -1,6 +1,6 @@
 package thinkjava.chapter5;
 
-/*
+/**
  * 对于成员变量不管是否指定了初始值，Java 在初始化对象的时候都会先将成员变量值置为默认值然后再初始化成类中定义的初始值
  * 比如 Initial 的 age 在初始化时候会经历 默认值 0 然后初始化成初始值 1.
  * 
@@ -24,7 +24,7 @@ class Initial {
 	private int id = 7;
 	
 	public String getInfo (int value) {
-		return this.info + "|" + value;
+		return this.info + " | " + value;
 	}
 	
 	public String getInfo () {
