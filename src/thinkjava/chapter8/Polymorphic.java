@@ -16,7 +16,7 @@ public class Polymorphic {
 		Polymorphic polymorphic = new Son();
 		polymorphic.printInfo();
 		
-		Polymorphic son = new Son();
+		Son son = new Son();
 		son.printInfo();
 
 		Super s = new Super();

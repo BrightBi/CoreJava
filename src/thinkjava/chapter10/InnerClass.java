@@ -27,6 +27,7 @@ public class InnerClass {
 		c1inner.outer().info();
 		c1.getInner().selfInfo();
 		c2inner.outer().info();
+		c2.getInner().selfInfo();
 		
 		show1.show();
 		show2.show();

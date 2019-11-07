@@ -31,43 +31,33 @@ public interface AboutInterface {
 }
 
 class A {
-	interface Ia {
-		void f();
-	}
-	
+
+	interface Ia { void f(); }
+	public interface Ib { void f(); }
+	private interface Ic { void f(); }
+
 	public class IaImpPublic implements Ia {
 		@Override
 		public void f() { System.out.println("IaImpPublic"); }
 	}
-
 	private class IaImpPrivate implements Ia {
 		@Override
 		public void f() { System.out.println("IaImpPrivate"); }
 	}
-	
-	public interface Ib {
-		void f();
-	}
-	
+
 	public class IbImpPublic implements Ib {
 		@Override
 		public void f() { System.out.println("IbImpPublic"); }
 	}
-
 	private class IbImpPrivate implements Ib {
 		@Override
 		public void f() { System.out.println("IbImpPrivate"); }
 	}
-	
-	private interface Ic {
-		void f();
-	}
-	
+
 	public class IcImpPublic implements Ic {
 		@Override
 		public void f() { System.out.println("IcImpPublic"); }
 	}
-
 	private class IcImpPrivate implements Ic {
 		@Override
 		public void f() { System.out.println("IcImpPrivate"); }
@@ -90,23 +80,16 @@ class TestInterface {
 	}
 	// 不能实现 private 的内部接口
 	// public class AIcImpPublic implements A.Ic { public void f() { System.out.println("AIcImpPublic"); } }
-	
 	public class AboutInterfaceImp implements AboutInterface {
 		@Override
-		public boolean getFlag() {
-			return false;
-		}
+		public boolean getFlag() { return false; }
 		@Override
-		public int getAge() {
-			return 9;
-		}
+		public int getAge() { return 9; }
 	}
 	
 	public class AboutInterfaceInnerInterface implements AboutInterface.InnerInterface {
 		@Override
-		public void f() {
-			System.out.println("AboutInterfaceInnerInterface");
-		}
+		public void f() { System.out.println("AboutInterfaceInnerInterface"); }
 	}
 	
 	public static void main(String[] args) {

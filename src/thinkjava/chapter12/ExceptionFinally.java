@@ -3,8 +3,8 @@ package thinkjava.chapter12;
 public class ExceptionFinally {
 
 	public static void main(String[] args) {
-		// nestFinally (10, 0);
-		// nestFinallyReturn (10, 0);
+		nestFinally (10, 0);
+		nestFinallyReturn (10, 0);
 		try {
 			exceptionChain (null);
 		} catch (Exception e) {
