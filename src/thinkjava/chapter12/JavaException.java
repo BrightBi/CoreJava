@@ -1,7 +1,8 @@
 package thinkjava.chapter12;
 /*
  * 异常都是用 new 在堆上创建的对象，垃圾回收器会处理这些对象的回收。
- * Error 和 Exception 继承自 Throwable，开发需要关注 Exception
+ * Error 和 Exception 继承自 Throwable，开发需要关注 Exception。
+ * Java 异常处理的根本目标是将异常的发生处跟异常的处理处分离。
  */
 public class JavaException {
 

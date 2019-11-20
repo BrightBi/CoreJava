@@ -3,3 +3,5 @@ Throwable:
     Exception:
         RuntimeException: 是那些可能在 Java 虚拟机正常运行期间抛出的异常的超类. NullPointerException, ClassCastException
         CheckedException: 一般是外部错误，这种异常都发生在编译阶段，Java 编译器会强制程序去捕获此类异常. IOException, SQLException
+
+Fork/Join 需要学习下

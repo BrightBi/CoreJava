@@ -11,6 +11,7 @@ public class ExceptionFinally {
 			e.printStackTrace(System.out);
 		}
 		exceptionFinal (10);
+		System.out.println("Return Missing Exception:" + finallyReturnMissingException (10, 0));
 	}
 	
 	public static void exceptionFinal (Integer x) {
@@ -65,6 +66,18 @@ public class ExceptionFinally {
 			e.printStackTrace(System.out);
 		} finally {
 			System.out.println("Finally outer");
+		}
+	}
+	
+	@SuppressWarnings("finally")
+	public static int finallyReturnMissingException (int x, int y) {
+		try {
+			System.out.println(x / y);
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		} finally {
+			// Finally 中带有 return 会使得本来需要抛出的异常丢失。
+			return 0;
 		}
 	}
 }
