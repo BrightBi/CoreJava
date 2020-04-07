@@ -36,10 +36,12 @@ class FinalValue {
 	private static final String ss = getStaticFinal (9);
 	
 	public String getFinal (int value) {
+		System.out.println("02");
 		return this.s + " - " + ss + " - " + value;
 	}
 	
 	public static String getStaticFinal (int value) {
+		System.out.println("01");
 		return ss + " - " + value;
 	}
 	

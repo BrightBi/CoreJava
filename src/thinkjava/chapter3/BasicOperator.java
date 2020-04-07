@@ -5,21 +5,23 @@ import java.util.Random;
 public class BasicOperator {
 
 	public static void main(String[] args) {
-		Random random = new Random(7); 
-		int i = random.nextInt(99);
-		System.out.println(i);
+		Random random1 = new Random(7); 
+		Random random2 = new Random(7); 
+		System.out.println(random1.nextInt(99) + "<=>" + random2.nextInt(99)); // 79<=>79
 		
 		byte t = 7;
 		// short s = +t; // 加号只是为了与减号对应，唯一作用仅是将较小类型操作数提升为 int
-		System.out.println(t + ":" + (++t)); // 先执行 ++ 运算，再生成值
-		System.out.println(t + ":" + (t++)); // 先生成值，再执行 ++ 运算
-		System.out.println(t);
+		System.out.println(t + ":" + (++t)); // 先执行 ++ 运算，再生成值 7:8
+		System.out.println(t + ":" + (t++)); // 先生成值，再执行 ++ 运算 8:8
+		System.out.println(t); // 9
 		
+		int i = 0;
 		// 与(&)、或(|)、异或(^)、取反(~)
 		i &= t;
 		i |= t;
 		i ^= t;
 		i = ~t; // i ~= t; 由于 ~ 是一元操作符，不能与 = 联用
+		System.out.println(i);
 		
 		boolean b = false;
 		boolean c = false; // boolean 类型能做的操作有限 &, |, ^, !, &&, ||, ==, !=
