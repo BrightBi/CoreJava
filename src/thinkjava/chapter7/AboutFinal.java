@@ -1,6 +1,9 @@
 package thinkjava.chapter7;
 /*
  * 类的构造方法实际上是 static 的，只是没有显示定义出来
+ * <此处有疑问，如果构造方法是 static 的，为什么构造方法中能调用非 static 方法 ？
+ * 理论上 static 方法是不可以调用非 static 方法。那么问题来了，究竟谁能触发类的加载？>
+ * 
  * 所以类的加载时机可以认为是 类的任意 static 成员被访问时（static 成员：static 域/static 方法/构造函数）
  */
 public class AboutFinal {
