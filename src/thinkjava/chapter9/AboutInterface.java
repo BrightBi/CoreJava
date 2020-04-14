@@ -12,7 +12,7 @@ public interface AboutInterface {
 	public static final boolean flag = true; // 接口中的域都是 public static final
 	int age = 1; // 不指定的情况下，默认也是 public static final
 	
-	public boolean getFlag (); // 接口中方法都是 public
+	public boolean getFlag (); // 接口中方法都是 public/default/abstract/static
 	int getAge (); // 不指定的情况下，默认也是 public
 	
 	/*

@@ -29,6 +29,11 @@ public class JavaException {
 		} catch (MyException e) {
 			e.printStackTrace(System.out);
 		}
+		try {
+			testSelfWrap ();
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
 	}
 
 	public static boolean test (int x) throws MyException {
@@ -55,6 +60,16 @@ public class JavaException {
 			// 此处将异常向外抛出，由于使用了 fillInStackTrace()，异常的栈轨迹跟发生异常时的栈轨迹是不一样的。
 			// 异常的栈轨迹会以此处为发生异常的起始位置。
 			throw (MyException) e.fillInStackTrace();
+		}
+	}
+	
+	public static void testSelfWrap () {
+		try {
+			test (0);
+		} catch (MyException e) {
+			// 此处将异常向外抛出，由于此处自己包装了异常，异常的栈轨迹跟发生异常时的栈轨迹是不一样的。
+			// 异常的栈轨迹会以此处为发生异常的起始位置。
+			throw new NullPointerException();
 		}
 	}
 }

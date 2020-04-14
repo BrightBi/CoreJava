@@ -3,7 +3,7 @@ package thinkjava.chapter10;
  * 普通内部类（非 static 的内部类）隐式的持有一个自己外部类的指向，能找到自己的外部类，所以普通内部类不能直接创建，需要其外部类创建
  * 静态内部类（也叫嵌套内部类）可以不依赖外部类来创建自身，但是静态内部类不能访问外部类的非静态对象，静态内部类并不隐式持有外部类的指向
  * 内部类可以嵌套多层，里层类总能访问外层类的域、方法等属性
- * 为什么要使用内部类：每个内部类都能独立等继承或实现接口或者类，而无需考虑外部类（变向的多重继承啊）
+ * 为什么要使用内部类：每个内部类都能独立的继承或实现接口或者类，而无需考虑外部类（变向的多重继承啊）
  */
 public class InnerClass {
 
@@ -30,6 +30,9 @@ public class InnerClass {
 		ClassWithInnerClass.Inner extendInner = new ExtendInnerClass(c1);
 		extendInner.selfInfo();
 		c1.getInner().selfInfo();
+		
+		ClassWithInnerClass extendClassWithInnerClass = new ExtendClassWithInnerClass("ExtendClassWithInnerClass");
+		extendClassWithInnerClass.getInner().selfInfo();
 	}
 }
 
@@ -49,14 +52,17 @@ class ClassWithInnerClass {
 		}
 	}
 	public class Inner {
-		// static int count = 1; // 普通内部类不能包含 static 对象(静态域 静态方法 静态类...)
-		// public static void f () {}
+		// 普通内部类不能包含 static 对象(静态域 静态方法 静态类...)，但是可以是 static final，且需要定义时就初始化。
+		// 非静态内部类中不能使用 静态构造块 static {...}
+		// static int count = 1;
+		static final int count = 1;
+		// public static void f() {}
 		public ClassWithInnerClass outer () {
-			// 内部对象生成对外部对象对引用 
+			// 内部对象生成对外部对象的引用 
 			return ClassWithInnerClass.this;
 		}
 		public void selfInfo () {
-			System.out.println("Inner");
+			System.out.println("Inner " + info);
 		}
 	}
 	public static class StaticInner {

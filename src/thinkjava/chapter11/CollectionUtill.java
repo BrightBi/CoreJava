@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 /*
- * HashMap 用于快速访问，TreeMap 的键始终处于排序状态，LinkedHashMap 保持元素插入顺序
+ * HashMap 用于快速访问，TreeMap 的键始终处于排序状态，LinkedHashMap 保持元素插入顺序（ConcurrentHashMap 线程安全）
  * HashSet 用于快速访问，TreeSet 的键始终处于排序状态，LinkedHashSet 保持元素插入顺序
  * 
  * 新程序中不应再出现过时的 Vector Hashtable Stack
