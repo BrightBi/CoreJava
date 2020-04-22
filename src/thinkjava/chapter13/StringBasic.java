@@ -34,6 +34,7 @@ public class StringBasic {
 		System.out.println(Arrays.toString("what is your name? Bright!".split("\\W+"))); // [what, is, your, name, Bright]
 		System.out.println(Arrays.toString("what is your name? Bright!".split(" "))); // [what, is, your, name?, Bright!]
 		System.out.println("what is your name? Bright!".replaceAll("\\W+", "_")); // what_is_your_name_Bright_
+		System.out.println("aabbaabb".replaceAll("ab", "a"));  // aabaab
 	}
 	
 	// 实参会拷贝一份引用传给形参 s
