@@ -12,7 +12,8 @@ public class Scan {
 	public static void main (String [] args) {
 		// simple();
 		// selfScanEnd();
-		regexScanEnd();
+		// regexScanEnd();
+		readFromSystemIn();
 	}
 	
 	public static void simple() {
@@ -38,9 +39,19 @@ public class Scan {
 		String pattern = "(\\w+)-(\\d+)";
 		// scanner.hasNext(pattern) 是基于下一次输入，如果下一次输入不匹配，while 循环将结束。
 		while (scanner.hasNext(pattern)) {
-			scanner.next(pattern);
+			System.out.println(scanner.next(pattern));
 			MatchResult result = scanner.match();
+			System.out.println(result.group(0));
 			System.out.println(result.group(1));
+			System.out.println(result.group(2));
+		}
+		scanner.close();
+	}
+	
+	public static void readFromSystemIn() {
+		Scanner scanner = new Scanner(System.in);
+		while (scanner.hasNext()) {
+			System.out.println(scanner.nextLine());
 		}
 		scanner.close();
 	}

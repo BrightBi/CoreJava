@@ -2,9 +2,7 @@ package thinkjava.chapter13;
 
 import java.util.Arrays;
 
-/*
- * 对于 String 类型数据的每一次修改，都会创建一个全新的 String
- */
+// 对于 String 类型数据的每一次修改，都会创建一个全新的 String
 public class StringBasic {
 
 	/*
@@ -22,7 +20,15 @@ public class StringBasic {
 		System.out.println(ss); // STRING
 		System.out.println(s); // String
 		
-		// 理论上内存中会生产 字符串 "a" "b" "c" 以及中间量 "ab" 和最终量 "abc"，实际上编译器会引入 SpringBuilder 来处理
+		String s1 = "111";
+		String s2 = "111";
+		String s3 = new String("111");
+		String s4 = new String("111");
+		System.out.println(s1 == s2); // true
+		System.out.println(s1 == s3); // false
+		System.out.println(s3 == s4); // false
+		
+		// 理论上内存中会产生 字符串 "a" "b" "c" 以及中间量 "ab" 和最终量 "abc"，实际上编译器会引入 SpringBuilder 来处理
 		System.out.println("a" + "b" + "c");
 		
 		System.out.println(new ToString());

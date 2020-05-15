@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
  * {n,m} -> 至少 n 次，且不超过 m 次
  * 
  * 正则表达式 A(B(C))D(E) 一共有 4 组，
- * 第 0 组：ABCD
+ * 第 0 组：ABCDE
  * 第 1 组：BC
  * 第 2 组：C
  * 第 3 组：E
@@ -89,6 +89,7 @@ public class Regex {
 		Matcher m = Pattern.compile("\\d+([abc](\\d+))(-)+").matcher("86c9-11d2-33a7-19b3");
 		while(m.find()) {
 			int groupNum = m.groupCount();
+			System.out.println("groupNum:" + groupNum);
 			for (int i = 0; i <= groupNum; i++) {
 				System.out.println("Match group " + i + ":" + m.group(i) + " | " + m.start() + " - " + (m.end() - 1));
 			}

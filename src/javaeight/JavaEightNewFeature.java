@@ -137,6 +137,18 @@ public class JavaEightNewFeature {
 		Map<String, Integer> pageVisits = new HashMap<>();
 		String page = "https://qq.com";
 		pageVisits.merge(page, 1, (oldValue, value) -> oldValue + value);
+		/*
+		 * 
+		 * Arrays.asList() 返回的是 Arrays 的内部类ArrayList，而不是java.util.ArrayList。
+		 * Arrays 的内部类 ArrayList 和 java.util.ArrayList 都是继承 AbstractList，
+		 * remove、add 等方法 AbstractList 中是默认 throw UnsupportedOperationException 而且不作任何操作。
+		 * java.util.ArrayList 重写了这些方法而 Arrays 的内部类ArrayList 没有重写，所以会抛出异常
+		 */
+		Map<String, List<Long>> map = new HashMap<>();
+		map.merge("name1", Arrays.asList(1L, 2L), (oValue, nValue) -> {
+			oValue.addAll(nValue);// java.lang.UnsupportedOperationException
+			return oValue;});
+		
 	}
 
 	public static List<String> methodInsteadLambda() {

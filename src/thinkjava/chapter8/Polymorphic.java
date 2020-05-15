@@ -3,7 +3,7 @@ package thinkjava.chapter8;
  * Java 继承和组合中能使用组合尽量使用组合
  * Java 中除了 static 和 final（private 方法也属于 final） 声明的方法，其余方法都是后期绑定
  * 对父类中 private 方法“重写”，不会产生多态效果，需要注意
- * 实际上只有非 private 的成员方法具有多态性。域和静态方法都没有多态性
+ * 实际上只有非 private 且非 final 的成员方法具有多态性。域和静态方法都没有多态性
  */
 public class Polymorphic {
 	
@@ -13,11 +13,15 @@ public class Polymorphic {
 
 	@SuppressWarnings({"static-access" })
 	public static void main(String[] args) {
-		Polymorphic polymorphic = new Son();
-		polymorphic.printInfo();
 		
 		Son son = new Son();
 		son.printInfo();
+		
+		Polymorphic polymorphic = son;
+		polymorphic.printInfo();
+		
+		Son sonPolymorphic = (Son) polymorphic;
+		sonPolymorphic.printInfo();
 
 		Super s = new Super();
 		s.print();
