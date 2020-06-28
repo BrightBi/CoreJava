@@ -12,9 +12,9 @@ public interface AboutInterface {
 	public static final boolean flag = true; // 接口中的域都是 public static final
 	int age = 1; // 不指定的情况下，默认也是 public static final
 	
-	public boolean getFlag (); // 接口中方法都是 public/default/abstract/static
-	int getAge (); // 不指定的情况下，默认也是 public
-	
+	public boolean getFlag (); // 接口中方法必须是 public/default/abstract/static
+	int getAge (); // 不指定的情况下，默认也是 public abstract
+
 	/*
 	 * 接口中可以嵌套接口。
 	 * 由于接口的特性，接口中所有元素都是 public 的，
@@ -30,6 +30,7 @@ public interface AboutInterface {
 	}
 }
 
+@SuppressWarnings("unused")
 class A {
 
 	interface Ia { void f(); }
@@ -40,6 +41,7 @@ class A {
 		@Override
 		public void f() { System.out.println("IaImpPublic"); }
 	}
+
 	private class IaImpPrivate implements Ia {
 		@Override
 		public void f() { System.out.println("IaImpPrivate"); }
