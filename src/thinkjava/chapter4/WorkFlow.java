@@ -5,9 +5,9 @@ import java.util.Random;
 public class WorkFlow {
 
 	public static void main(String[] args) {
-		switchCase("sss");
-		// testRandom();
-		testFor();
+		// switchCase("sss");
+		testRandom();
+		// testFor();
 		// Java 中使用带标签 break／continue 唯一理由就是处理循环嵌套
 	}
 	

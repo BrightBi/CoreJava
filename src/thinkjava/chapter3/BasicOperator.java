@@ -10,7 +10,7 @@ public class BasicOperator {
 		System.out.println(random1.nextInt(99) + "<=>" + random2.nextInt(99)); // 79<=>79
 		
 		byte t = 7;
-		// short s = +t; // 加号只是为了与减号对应，唯一作用仅是将较小类型操作数提升为 int
+		// int s = +t; // 加号只是为了与减号对应，唯一作用仅是将较小类型操作数提升为 int
 		System.out.println(t + ":" + (++t)); // 先执行 ++ 运算，再生成值 7:8
 		System.out.println(t + ":" + (t++)); // 先生成值，再执行 ++ 运算 8:8
 		System.out.println(t); // 9
