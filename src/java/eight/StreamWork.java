@@ -1,4 +1,4 @@
-package javaeight;
+package java.eight;
 
 import java.util.ArrayList;
 import java.util.Arrays;

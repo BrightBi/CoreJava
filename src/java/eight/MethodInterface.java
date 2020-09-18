@@ -1,4 +1,4 @@
-package javaeight;
+package java.eight;
 
 interface StringFunction {
 	String func(String n);
